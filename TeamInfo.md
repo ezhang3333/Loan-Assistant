@@ -12,8 +12,8 @@
 | Member1     |  ethanjz2@illinois.edu |
 | Member2     |     Aamir Abjani       |
 | Member2     |  aabjani2@illinois.edu |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |    Nikith Gottipati    |
+| Member3     |  nikithg2@illinois.edu |
 
 ## Project Information
 
