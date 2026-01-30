@@ -1,17 +1,17 @@
-# team000-sample
+# team095-AEA
 
 ## Basic Information
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-| TeamID      |        Team-000        |
-| TeamName    |         sample         |
-| Captain     |       Abdu Alawini     |
-| Captain     |  alawini@illinois.edu  |
-| Member1     |  Shadman Saqib Eusuf   |
-| Member1     |  seusuf2@illinois.edu  |
-| Member2     |     Aryaman Nasare     |
-| Member2     |  nasare2@illinois.edu  |
+| TeamID      |        team095         |
+| TeamName    |          AEA           |
+| Captain     |     Akhil Morisetty    |
+| Captain     |  akhilm6@illinois.edu  |
+| Member1     |      Ethan Zhang       |
+| Member1     |  ethanjz2@illinois.edu |
+| Member2     |     Aamir Abjani       |
+| Member2     |  aabjani2@illinois.edu |
 | Member3     |                        |
 | Member3     |                        |
 
