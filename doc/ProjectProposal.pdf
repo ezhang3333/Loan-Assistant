@@ -1,0 +1,43 @@
+Loan Match
+
+
+Project Summary - 
+We are going to build an app that helps users navigate the confusing and messy loan approval process. We want to provide users with an initial pre-qualification score and bank matching display that will take personal inputs from the user and estimate an approval probability based on a historical loan dataset. Our app will then rank lenders by a fit score that would include factors such as probability of approval, distance from their current location, loan type, etc. Users will then be able to select whichever bank they are interested in applying for, and our app will list a set of the biggest risk factors. This step in the loan approval process will also provide some actionable steps that users should or could take in order to increase their chances of approval. We also want the user to be able to calculate how their probability would change based on some actionable changes they might make.
+	This application should apply to anyone considering or wondering about taking out a loan, and the types of loans we are currently aiming for are: home, auto, and personal loans.
+
+
+
+Creative Components - 
+The two creative components that can improve the functionality of our application are adding a Loan Helper/Assistant, which provides the user with strategies to improve their chances of getting their loan approved, and provides the user with a timeline plan to get it approved. The Loan Helper/Assistant will have a loan strategy optimizer and a loan pathway planner. The second creative component that can enhance our application's functionality is a bank loan approval heatmap. The bank loan approval heatmap will be a heatmap of all the loans that have been approved by each bank with a similar profile to the user.
+For the first creative component of the loan helper/assistant we are adding an extra feature where the application will generate a personalized and actionable plan based on the user’s profile for what the user needs to change and for how long. Moreover, their loan helper/assistant will have a timeline dashboard and a tradeoff chart for the plans. 
+The second creative component, which is the heatmap, will have bank loan approval density for each of the banks surrounding the user based on similar profiles who have gotten their loan approved. This will have interactive visualization in the form of a heatmap grid to display banks and the approval density. Both of these creative components enhance the applications to provide more to the user than simply telling them whether or not they are going to get approved for a loan based on their profile. 
+
+
+Usefulness - 
+Our application is useful because it helps people understand whether or not they are going to get their loan approved and saves them the time and effort of going through the loan application just for their loan to get denied. Instead of going through the intensive process of completing multiple loan applications, users can use our application and receive a likelihood of them getting their loan approved, and a list of banks in the area and the likelihood of those banks giving an approval as well. 
+The basic functions of our web application include the user filling out their profile and the type of loan they are looking for, and then the application outputs the likelihood of them getting their loan approved, and a list of banks that are likely to approve their loan in the area. Moreover, some complex features that our application has are a loan helper/assistant and a bank approval heat map. Both features are explained in the creative components section. 
+A similar application that is out there is called Lending Tree, but it is not as direct as what our web application intends to do. Our application includes likelihood estimates and compares with profiles in the area who have been approved for a loan. Moreover, our web application takes the next step with the loan assistant/helper and the bank approval heat map. 
+
+
+Realness - 
+	There are two main data sources that we are going to use to build our applications. The first one is a dataset on loan approval, which contains the profiles for people who have applied for a loan. We plan on taking both datasets we use from Kaggle and they come in the format of csv files. The data source for the first dataset on loan approval contains information on loan amounts, annual income, applicant demographics and ID, as well as credit score and existing loans. The file size is 55.59 kB and has 1000 rows for applicant IDs as well as 11 total columns for the dataset.
+Our second dataset will focus on bank loans given to applicants. The data source for this second dataset focuses more on loan amounts, funded amounts given, interest rates, as well as grades given for the loans. Similar to the first dataset, this is also a csv file with over a million records/rows and 111 attributes/columns. The file size is 34.81 MB and also contains unique loan ids and member ids as well as the loan term. This will be beneficial when creating our Loan Helper/Assistant which will help users get their loans approved and create a timeline as well.
+
+
+Links:
+https://www.kaggle.com/datasets/amineipad/loan-approval-dataset
+https://www.kaggle.com/datasets/puneetpainuly/bank-loan-dataset
+
+
+
+
+A detailed description of the functionality that your website offers. This is where you talk about what the website delivers. Talk about how a user would interact with the application (i.e., things that one could create, delete, update, or search for). Read the requirements for stage 4 to see what other functionalities you want to provide to the users. You should include: 
+A clear list of the functionality: Who [add/insert/update/delete] what types of data in your application when? (e.g., the user would submit a form with [what data] when they [want to do something].)
+A low-fidelity UI mockup: What do you imagine your final application’s interface might look like? A PowerPoint slide or a pencil sketch on a piece of paper works!
+Project work distribution: Who will be responsible for each of the tasks or subtasks?
+Explain how backend systems will be distributed across members. Be as specific as possible, as this could be part of the final peer evaluation metrics.
+
+
+Functionality -
+	Our application will provide a personalized dashboard where users can identify what bank loans they will be approved for. Upon entering the application, a create operation will begin as users will be asked to input their personal information with their financial information to a User’s Financial Information table. This then triggers the read functionality where SQL queries are run to compare the user’s financial profile against historical bank loan data. Stored procedures such as “Join” operations and “Group By” aggregations will be used to achieve the results which are then displayed to the user through a pre-qualification score and a ranked list matching the user with the banks most likely to give them loan approval. This is also where we will be including our second creative component which is the bank approval heatmap which will be using a trigger to monitor the historical data performance table. To ensure the app remains dynamic, we will allow users to update their profile within the Loan Helper/Assistant feature to simulate different financial scenarios and a delete function to clear out any old simulations.
+	The workload will be distributed amongst all members of the group so each member is able to play to their strengths, while also getting the opportunity to apply their database knowledge from this course. We will have 2 members primarily focused on working on the frontend and visualization. They will be responsible for the dashboard, search interface, and heatmap visualization. We will then have 2 members primarily focused on working on the backend. Their tasks will be … Finally, as a collective team we will work together on the database aspect of the project. This will include … We believe this split will give everyone on our team a fair opportunity to work on their database skills while also building upon previous strengths.
