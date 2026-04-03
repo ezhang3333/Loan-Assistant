@@ -11,3 +11,5 @@ Revision 3: We added an eval score to the Simulations table to give users a sens
 
 Comment 4: FKs shouldn't be included in the UML diagram. FKs are implementation level, not conceptual level.
 Revision 4: We removed all FKs from the UML diagram.
+
+Comment 5: No normalization process shown
