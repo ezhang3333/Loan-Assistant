@@ -13,3 +13,4 @@ Comment 4: FKs shouldn't be included in the UML diagram. FKs are implementation 
 Revision 4: We removed all FKs from the UML diagram.
 
 Comment 5: No normalization process shown
+Revision 5: We added the normalization process showing all of our functional dependencies and our decision to use BCNF.
