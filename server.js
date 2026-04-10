@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Database connection - UPDATE THESE WITH YOUR CLOUD SQL CREDENTIALS
 const db = mysql.createConnection({
-  host: '34.27.85.6',
+  host: '34.69.124.135',
     user: 'aamiraccount',
     password: 'Aamir123#',
     database: 'loan_match_db'
