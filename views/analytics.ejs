@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics - Loan Match</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #333; }
+    .navbar { background: #1a73e8; padding: 15px 30px; display: flex; align-items: center; gap: 30px; }
+    .navbar a { color: white; text-decoration: none; font-size: 16px; }
+    .navbar a:hover { text-decoration: underline; }
+    .navbar .brand { font-size: 22px; font-weight: bold; }
+    .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+    h2 { margin-bottom: 15px; color: #1a73e8; }
+    .section { background: white; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .query-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .query-btn { padding: 12px 20px; border: 2px solid #1a73e8; border-radius: 5px; cursor: pointer; font-size: 14px; background: white; color: #1a73e8; text-decoration: none; }
+    .query-btn:hover, .query-btn.active { background: #1a73e8; color: white; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #f8f9fa; color: #555; font-weight: 600; }
+    tr:hover { background: #f8f9fa; }
+    .query-desc { color: #666; margin-bottom: 15px; font-style: italic; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="brand">Loan Match</a>
+    <a href="/users">Users</a>
+    <a href="/loans">Loans</a>
+    <a href="/banks">Banks</a>
+    <a href="/analytics">Analytics</a>
+  </nav>
+
+  <div class="container">
+    <div class="section">
+      <h2>Advanced Analytics</h2>
+      <div class="query-buttons">
+        <a href="/analytics?query=1" class="query-btn <%= activeQuery === '1' ? 'active' : '' %>">
+          Banks by State
+        </a>
+        <a href="/analytics?query=2" class="query-btn <%= activeQuery === '2' ? 'active' : '' %>">
+          High-Value Loans
+        </a>
+        <a href="/analytics?query=3" class="query-btn <%= activeQuery === '3' ? 'active' : '' %>">
+          Credit-Focused Banks
+        </a>
+      </div>
+
+      <% if (activeQuery === '1') { %>
+        <p class="query-desc">Number of banks, average household income, and average credit score per state</p>
+      <% } else if (activeQuery === '2') { %>
+        <p class="query-desc">Loan purposes where individual amounts exceed the overall average, grouped by purpose</p>
+      <% } else { %>
+        <p class="query-desc">Banks in areas with above-average credit scores, ranked by score</p>
+      <% } %>
+
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <% if (results.length > 0) { %>
+                <% Object.keys(results[0]).forEach(key => { %>
+                  <th><%= key %></th>
+                <% }); %>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% results.forEach(row => { %>
+            <tr>
+              <% Object.values(row).forEach(val => { %>
+                <td><%= val !== null ? (typeof val === 'number' && val > 100 ? Number(val).toLocaleString() : val) : 'N/A' %></td>
+              <% }); %>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

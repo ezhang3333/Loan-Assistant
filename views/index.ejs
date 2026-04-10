@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Match</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; color: #333; }
+    .navbar { background: #1a73e8; padding: 15px 30px; display: flex; align-items: center; gap: 30px; }
+    .navbar a { color: white; text-decoration: none; font-size: 16px; }
+    .navbar a:hover { text-decoration: underline; }
+    .navbar .brand { font-size: 22px; font-weight: bold; }
+    .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; }
+    .hero h1 { font-size: 48px; margin-bottom: 15px; }
+    .hero p { font-size: 20px; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+    .cards { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; padding: 50px 20px; }
+    .card { background: white; border-radius: 10px; padding: 30px; width: 280px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+    .card h3 { margin-bottom: 10px; color: #1a73e8; }
+    .card p { color: #666; margin-bottom: 20px; }
+    .card a { display: inline-block; background: #1a73e8; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; }
+    .card a:hover { background: #0d47a1; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="brand">Loan Match</a>
+    <a href="/users">Users</a>
+    <a href="/loans">Loans</a>
+    <a href="/banks">Banks</a>
+    <a href="/analytics">Analytics</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Loan Match</h1>
+    <p>Navigate the loan approval process with pre-qualification scores and bank matching.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Users</h3>
+      <p>Create, view, update, and delete user profiles with credit scores and loan details.</p>
+      <a href="/users">Manage Users</a>
+    </div>
+    <div class="card">
+      <h3>Loans</h3>
+      <p>Browse and filter loan records by purpose and type.</p>
+      <a href="/loans">View Loans</a>
+    </div>
+    <div class="card">
+      <h3>Banks</h3>
+      <p>Find banks by state with location and credit score data.</p>
+      <a href="/banks">Find Banks</a>
+    </div>
+    <div class="card">
+      <h3>Analytics</h3>
+      <p>Run advanced queries to analyze banks, loans, and credit scores.</p>
+      <a href="/analytics">View Analytics</a>
+    </div>
+  </div>
+</body>
+</html>
