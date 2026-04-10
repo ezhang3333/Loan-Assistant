@@ -15,10 +15,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Database connection - UPDATE THESE WITH YOUR CLOUD SQL CREDENTIALS
 const db = mysql.createConnection({
-  host: process.env.DB_HOST || 'YOUR_CLOUD_SQL_IP',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'YOUR_PASSWORD',
-  database: process.env.DB_NAME || 'loan_match'
+  host: '34.27.85.6',
+    user: 'aamiraccount',
+    password: 'Aamir123#',
+    database: 'loan_match_db'
 });
 
 db.connect((err) => {
