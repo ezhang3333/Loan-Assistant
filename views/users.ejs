@@ -1,408 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users - Loan Match</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Users - LoanMatch</title>
   <style>
-    :root {
-      --primary: #2563EB;
-      --primary-hover: #1D4ED8;
-      --primary-light: #DBEAFE;
-      --surface: #FFFFFF;
-      --surface-secondary: #F8FAFC;
-      --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-muted: #94A3B8;
-      --success: #10B981;
-      --success-bg: #D1FAE5;
-      --error: #EF4444;
-      --error-bg: #FEE2E2;
-      --border: #E2E8F0;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-      --radius-md: 8px;
-      --radius-lg: 12px;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--surface-secondary); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
-
-    .navbar {
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(12px);
-      padding: 0 32px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .navbar .brand { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
-    .nav-links { display: flex; gap: 4px; margin-left: auto; }
-    .nav-links a {
-      color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500;
-      padding: 8px 16px; border-radius: var(--radius-md); transition: all 200ms ease;
-    }
-    .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
-    .nav-links a.active { color: var(--primary); background: var(--primary-light); }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
-    .page-header { margin-bottom: 32px; }
-    .page-header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
-    .page-header p { color: var(--text-secondary); font-size: 15px; margin-top: 4px; }
-
-    .alert {
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      margin-bottom: 20px;
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .alert-success { background: var(--success-bg); color: #065F46; border: 1px solid #A7F3D0; }
-    .alert-error { background: var(--error-bg); color: #991B1B; border: 1px solid #FECACA; }
-
-    .section {
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
-    }
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      letter-spacing: -0.3px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
-    .form-group input, .form-group select {
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 14px;
-      font-family: inherit;
-      background: var(--surface);
-      transition: all 200ms ease;
-      color: var(--text-primary);
-    }
-    .form-group input:focus, .form-group select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-    }
-
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: inherit;
-      transition: all 200ms ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary { background: var(--surface-secondary); color: var(--text-primary); border: 1px solid var(--border); }
-    .btn-secondary:hover { background: #F1F5F9; }
-    .btn-danger { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
-    .btn-danger:hover { background: #FECACA; }
-    .btn-sm { padding: 6px 12px; font-size: 13px; }
-    .btn-row { display: flex; gap: 8px; margin-top: 20px; }
-
-    .search-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; }
-
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    thead { position: sticky; top: 64px; }
-    th {
-      padding: 12px 12px;
-      text-align: left;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      background: var(--surface-secondary);
-      border-bottom: 1px solid var(--border);
-    }
-    td {
-      padding: 12px 12px;
-      border-bottom: 1px solid #F1F5F9;
-      color: var(--text-secondary);
-    }
-    tr:hover td { background: var(--surface-secondary); }
-    td:first-child { font-weight: 600; color: var(--text-primary); }
-
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-    .badge-blue { background: var(--primary-light); color: var(--primary); }
-
-    .table-wrapper { overflow-x: auto; border-radius: var(--radius-md); }
-    .table-footer { padding: 12px 0 0; font-size: 13px; color: var(--text-muted); }
+    body { font-family: sans-serif; margin: 40px; }
+    nav a { margin-right: 15px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; font-size: 14px; }
+    th { background: #eee; }
+    input, select { padding: 4px; margin: 2px 0; }
+    .msg-ok { color: green; }
+    .msg-err { color: red; }
+    fieldset { margin: 15px 0; padding: 15px; }
+    label { display: inline-block; width: 140px; font-size: 14px; }
+    .row { margin-bottom: 5px; }
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="/" class="brand">LoanMatch</a>
-    <div class="nav-links">
-      <a href="/users" class="active">Users</a>
-      <a href="/loans">Loans</a>
-      <a href="/banks">Banks</a>
-      <a href="/analytics">Analytics</a>
-    </div>
+  <h1>Users</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/users">Users</a>
+    <a href="/loans">Loans</a>
+    <a href="/banks">Banks</a>
+    <a href="/analytics">Analytics</a>
   </nav>
+  <hr>
 
-  <div class="container">
-    <div class="page-header">
-      <h1>Users</h1>
-      <p>Manage user profiles, credit scores, and loan applications.</p>
-    </div>
+  <% if (success) { %><p class="msg-ok"><%= success %></p><% } %>
+  <% if (error) { %><p class="msg-err"><%= error %></p><% } %>
 
-    <% if (success) { %>
-      <div class="alert alert-success"><%= success %></div>
-    <% } %>
-    <% if (error) { %>
-      <div class="alert alert-error"><%= error %></div>
-    <% } %>
+  <fieldset>
+    <legend>Search</legend>
+    <form action="/users/search" method="GET">
+      <label>Username</label><input type="text" name="username">
+      <label>Min Credit</label><input type="number" name="min_credit">
+      <label>Max Credit</label><input type="number" name="max_credit">
+      <button type="submit">Search</button>
+      <a href="/users">Reset</a>
+    </form>
+  </fieldset>
 
-    <!-- Search -->
-    <div class="section">
-      <div class="section-title">Search Users</div>
-      <form action="/users/search" method="GET" class="search-bar">
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" name="username" placeholder="Search by name">
-        </div>
-        <div class="form-group">
-          <label>Min Credit Score</label>
-          <input type="number" name="min_credit" placeholder="e.g. 600">
-        </div>
-        <div class="form-group">
-          <label>Max Credit Score</label>
-          <input type="number" name="max_credit" placeholder="e.g. 800">
-        </div>
-        <div class="btn-row" style="margin-top:0">
-          <button type="submit" class="btn btn-primary">Search</button>
-          <a href="/users" class="btn btn-secondary" style="text-decoration:none;">Reset</a>
-        </div>
-      </form>
-    </div>
+  <fieldset>
+    <legend>Add User</legend>
+    <form action="/users/add" method="POST">
+      <div class="row"><label>Username</label><input type="text" name="username" required></div>
+      <div class="row"><label>Password</label><input type="password" name="password" required></div>
+      <div class="row"><label>Gender</label>
+        <select name="gender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+      <div class="row"><label>Marital Status</label>
+        <select name="marital_status"><option>Single</option><option>Married</option><option>Divorced</option></select></div>
+      <div class="row"><label>Annual Income</label><input type="number" name="annual_income" step="0.01"></div>
+      <div class="row"><label>Credit Score</label><input type="number" name="credit_score"></div>
+      <div class="row"><label>Loans Taken</label><input type="number" name="num_loans_taken" value="0"></div>
+      <div class="row"><label>Age</label><input type="number" name="age"></div>
+      <div class="row"><label>Employment</label>
+        <select name="employment_status"><option>Employed</option><option>Self-employed</option><option>Unemployed</option><option>Student</option></select></div>
+      <div class="row"><label>Existing Loans</label><input type="number" name="num_existing_loans" value="0"></div>
+      <div class="row"><label>Zipcode</label><input type="number" name="zipcode"></div>
+      <div class="row"><label>Loan Amount</label><input type="number" name="loan_amount_asked" step="0.01"></div>
+      <button type="submit">Add</button>
+    </form>
+  </fieldset>
 
-    <!-- Add User -->
-    <div class="section">
-      <div class="section-title">Add New User</div>
-      <form action="/users/add" method="POST">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Username *</label>
-            <input type="text" name="username" required>
-          </div>
-          <div class="form-group">
-            <label>Password *</label>
-            <input type="password" name="password" required>
-          </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <select name="gender">
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Marital Status</label>
-            <select name="marital_status">
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-              <option value="Divorced">Divorced</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Annual Income</label>
-            <input type="number" name="annual_income" step="0.01" placeholder="50000.00">
-          </div>
-          <div class="form-group">
-            <label>Credit Score</label>
-            <input type="number" name="credit_score" placeholder="700">
-          </div>
-          <div class="form-group">
-            <label>Loans Taken</label>
-            <input type="number" name="num_loans_taken" value="0">
-          </div>
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" name="age" placeholder="30">
-          </div>
-          <div class="form-group">
-            <label>Employment Status</label>
-            <select name="employment_status">
-              <option value="Employed">Employed</option>
-              <option value="Self-employed">Self-employed</option>
-              <option value="Unemployed">Unemployed</option>
-              <option value="Student">Student</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Existing Loans</label>
-            <input type="number" name="num_existing_loans" value="0">
-          </div>
-          <div class="form-group">
-            <label>Zipcode</label>
-            <input type="number" name="zipcode" placeholder="60601">
-          </div>
-          <div class="form-group">
-            <label>Loan Amount Asked</label>
-            <input type="number" name="loan_amount_asked" step="0.01" placeholder="10000.00">
-          </div>
-        </div>
-        <div class="btn-row">
-          <button type="submit" class="btn btn-primary">Add User</button>
-        </div>
-      </form>
-    </div>
+  <h3>All Users (<%= users.length %>)</h3>
+  <table>
+    <tr>
+      <th>ID</th><th>Username</th><th>Gender</th><th>Marital</th><th>Income</th>
+      <th>Credit</th><th>Age</th><th>Employment</th><th>Zipcode</th><th>Loan Asked</th><th></th>
+    </tr>
+    <% users.forEach(u => { %>
+    <tr>
+      <td><%= u.user_id %></td>
+      <td><%= u.username %></td>
+      <td><%= u.gender %></td>
+      <td><%= u.marital_status %></td>
+      <td><%= u.annual_income %></td>
+      <td><%= u.credit_score %></td>
+      <td><%= u.age %></td>
+      <td><%= u.employment_status %></td>
+      <td><%= u.zipcode %></td>
+      <td><%= u.loan_amount_asked %></td>
+      <td>
+        <form action="/users/delete" method="POST" style="display:inline" onsubmit="return confirm('Delete?')">
+          <input type="hidden" name="user_id" value="<%= u.user_id %>">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+  </table>
 
-    <!-- User Table -->
-    <div class="section">
-      <div class="section-title">All Users</div>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Gender</th>
-              <th>Marital Status</th>
-              <th>Income</th>
-              <th>Credit Score</th>
-              <th>Age</th>
-              <th>Employment</th>
-              <th>Zipcode</th>
-              <th>Loan Asked</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% users.forEach(user => { %>
-            <tr>
-              <td><%= user.user_id %></td>
-              <td><%= user.username %></td>
-              <td><%= user.gender %></td>
-              <td><%= user.marital_status %></td>
-              <td>$<%= user.annual_income ? Number(user.annual_income).toLocaleString() : 'N/A' %></td>
-              <td><span class="badge badge-blue"><%= user.credit_score %></span></td>
-              <td><%= user.age %></td>
-              <td><%= user.employment_status %></td>
-              <td><%= user.zipcode %></td>
-              <td>$<%= user.loan_amount_asked ? Number(user.loan_amount_asked).toLocaleString() : 'N/A' %></td>
-              <td>
-                <form action="/users/delete" method="POST" onsubmit="return confirm('Delete this user?')" style="display:inline">
-                  <input type="hidden" name="user_id" value="<%= user.user_id %>">
-                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
-              </td>
-            </tr>
-            <% }); %>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-footer"><%= users.length %> users shown</div>
-    </div>
-
-    <!-- Update User -->
-    <div class="section">
-      <div class="section-title">Update User</div>
-      <form action="/users/update" method="POST">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>User ID *</label>
-            <input type="number" name="user_id" required placeholder="Enter user ID to update">
-          </div>
-          <div class="form-group">
-            <label>Username *</label>
-            <input type="text" name="username" required>
-          </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <select name="gender">
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Marital Status</label>
-            <select name="marital_status">
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-              <option value="Divorced">Divorced</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Annual Income</label>
-            <input type="number" name="annual_income" step="0.01">
-          </div>
-          <div class="form-group">
-            <label>Credit Score</label>
-            <input type="number" name="credit_score">
-          </div>
-          <div class="form-group">
-            <label>Loans Taken</label>
-            <input type="number" name="num_loans_taken">
-          </div>
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" name="age">
-          </div>
-          <div class="form-group">
-            <label>Employment Status</label>
-            <select name="employment_status">
-              <option value="Employed">Employed</option>
-              <option value="Self-employed">Self-employed</option>
-              <option value="Unemployed">Unemployed</option>
-              <option value="Student">Student</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Existing Loans</label>
-            <input type="number" name="num_existing_loans">
-          </div>
-          <div class="form-group">
-            <label>Zipcode</label>
-            <input type="number" name="zipcode">
-          </div>
-          <div class="form-group">
-            <label>Loan Amount Asked</label>
-            <input type="number" name="loan_amount_asked" step="0.01">
-          </div>
-        </div>
-        <div class="btn-row">
-          <button type="submit" class="btn btn-primary">Update User</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <fieldset>
+    <legend>Update User</legend>
+    <form action="/users/update" method="POST">
+      <div class="row"><label>User ID</label><input type="number" name="user_id" required></div>
+      <div class="row"><label>Username</label><input type="text" name="username" required></div>
+      <div class="row"><label>Gender</label>
+        <select name="gender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+      <div class="row"><label>Marital Status</label>
+        <select name="marital_status"><option>Single</option><option>Married</option><option>Divorced</option></select></div>
+      <div class="row"><label>Annual Income</label><input type="number" name="annual_income" step="0.01"></div>
+      <div class="row"><label>Credit Score</label><input type="number" name="credit_score"></div>
+      <div class="row"><label>Loans Taken</label><input type="number" name="num_loans_taken"></div>
+      <div class="row"><label>Age</label><input type="number" name="age"></div>
+      <div class="row"><label>Employment</label>
+        <select name="employment_status"><option>Employed</option><option>Self-employed</option><option>Unemployed</option><option>Student</option></select></div>
+      <div class="row"><label>Existing Loans</label><input type="number" name="num_existing_loans"></div>
+      <div class="row"><label>Zipcode</label><input type="number" name="zipcode"></div>
+      <div class="row"><label>Loan Amount</label><input type="number" name="loan_amount_asked" step="0.01"></div>
+      <button type="submit">Update</button>
+    </form>
+  </fieldset>
 </body>
 </html>
