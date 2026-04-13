@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loans - LoanMatch</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; }
+    nav a { margin-right: 15px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; font-size: 14px; }
+    th { background: #eee; }
+    input { padding: 4px; }
+    fieldset { margin: 15px 0; padding: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Loans</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/users">Users</a>
+    <a href="/loans">Loans</a>
+    <a href="/banks">Banks</a>
+    <a href="/analytics">Analytics</a>
+  </nav>
+  <hr>
+
+  <fieldset>
+    <legend>Filter</legend>
+    <form action="/loans" method="GET">
+      <label>Purpose</label> <input type="text" name="purpose">
+      <label>Loan Type</label> <input type="text" name="loan_type">
+      <button type="submit">Search</button>
+      <a href="/loans">Reset</a>
+    </form>
+  </fieldset>
+
+  <h3>Loan Records (<%= loans.length %>)</h3>
+  <table>
+    <tr>
+      <th>ID</th><th>Amount</th><th>Term</th><th>Subgrade</th>
+      <th>Installments</th><th>Purpose</th><th>Type</th><th>State</th>
+    </tr>
+    <% loans.forEach(l => { %>
+    <tr>
+      <td><%= l.loan_id %></td>
+      <td><%= l.amount %></td>
+      <td><%= l.term %></td>
+      <td><%= l.subgrade %></td>
+      <td><%= l.installments %></td>
+      <td><%= l.purpose %></td>
+      <td><%= l.loan_type %></td>
+      <td><%= l.loan_state %></td>
+    </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

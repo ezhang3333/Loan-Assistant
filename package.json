@@ -1,0 +1,16 @@
+{
+  "name": "loan-match",
+  "version": "1.0.0",
+  "description": "Loan Match - CS411 Team095 AEA",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^17.4.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0"
+  }
+}
