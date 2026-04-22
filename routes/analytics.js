@@ -38,8 +38,8 @@ router.get('/', (req, res) => {
   const sql = QUERIES[q] || QUERIES['1'];
 
   db.query(sql, (err, rows) => {
-    if (err) return res.status(500).send('db error');
-    res.render('analytics', { results: rows, activeQuery: q });
+    if (err) return res.status(500).json({ error: 'db error' });
+    res.json({ results: rows, activeQuery: q });
   });
 });
 

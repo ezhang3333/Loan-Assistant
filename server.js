@@ -1,23 +1,21 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 80;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.render('index'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/loans', require('./routes/loans'));
+app.use('/api/banks', require('./routes/banks'));
+app.use('/api/analytics', require('./routes/analytics'));
 
-app.use('/users', require('./routes/users'));
-app.use('/loans', require('./routes/loans'));
-app.use('/banks', require('./routes/banks'));
-app.use('/analytics', require('./routes/analytics'));
+const clientDist = path.join(__dirname, 'client', 'dist');
+app.use(express.static(clientDist));
+app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`running on :${PORT}`);

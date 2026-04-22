@@ -4,20 +4,10 @@ const router = express.Router();
 
 const LIST_SQL = 'SELECT * FROM User ORDER BY user_id LIMIT 50';
 
-function renderList(res, opts = {}) {
-  db.query(LIST_SQL, (err, rows) => {
-    res.render('users', {
-      users: rows || [],
-      error: opts.error || null,
-      success: opts.success || null
-    });
-  });
-}
-
 router.get('/', (req, res) => {
   db.query(LIST_SQL, (err, rows) => {
-    if (err) return res.status(500).send('db error');
-    res.render('users', { users: rows, error: null, success: null });
+    if (err) return res.status(500).json({ error: 'db error' });
+    res.json({ users: rows });
   });
 });
 
@@ -44,8 +34,8 @@ router.get('/search', (req, res) => {
     + ' ORDER BY user_id LIMIT 50';
 
   db.query(sql, params, (err, rows) => {
-    if (err) return res.status(500).send('db error');
-    res.render('users', { users: rows, error: null, success: null });
+    if (err) return res.status(500).json({ error: 'db error' });
+    res.json({ users: rows });
   });
 });
 
@@ -53,7 +43,7 @@ router.post('/add', (req, res) => {
   const b = req.body;
 
   db.query('SELECT COALESCE(MAX(user_id), 0) + 1 AS next_id FROM User', (err, r) => {
-    if (err) return res.status(500).send('db error');
+    if (err) return res.status(500).json({ error: 'db error' });
 
     const sql = `INSERT INTO User
       (user_id, username, password, gender, marital_status, annual_income,
@@ -68,8 +58,8 @@ router.post('/add', (req, res) => {
     ];
 
     db.query(sql, vals, err2 => {
-      if (err2) return renderList(res, { error: 'add failed: ' + err2.message });
-      renderList(res, { success: 'user added' });
+      if (err2) return res.status(400).json({ error: 'add failed: ' + err2.message });
+      res.json({ success: 'user added' });
     });
   });
 });
@@ -88,15 +78,15 @@ router.post('/update', (req, res) => {
   ];
 
   db.query(sql, vals, err => {
-    if (err) return renderList(res, { error: 'update failed: ' + err.message });
-    renderList(res, { success: 'updated' });
+    if (err) return res.status(400).json({ error: 'update failed: ' + err.message });
+    res.json({ success: 'updated' });
   });
 });
 
 router.post('/delete', (req, res) => {
   db.query('DELETE FROM User WHERE user_id = ?', [req.body.user_id], err => {
-    if (err) return renderList(res, { error: 'delete failed: ' + err.message });
-    renderList(res, { success: 'deleted' });
+    if (err) return res.status(400).json({ error: 'delete failed: ' + err.message });
+    res.json({ success: 'deleted' });
   });
 });
 

@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
     + ' ORDER BY loan_id LIMIT 50';
 
   db.query(sql, params, (err, rows) => {
-    if (err) return res.status(500).send('db error');
-    res.render('loans', { loans: rows });
+    if (err) return res.status(500).json({ error: 'db error' });
+    res.json({ loans: rows });
   });
 });
 

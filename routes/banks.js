@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
   sql += ' ORDER BY b.bank_id LIMIT 50';
 
   db.query(sql, params, (err, rows) => {
-    if (err) return res.status(500).send('db error');
-    res.render('banks', { banks: rows });
+    if (err) return res.status(500).json({ error: 'db error' });
+    res.json({ banks: rows });
   });
 });
 
