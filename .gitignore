@@ -8,3 +8,10 @@ client/dist/
 # vite / ts caches
 client/.vite/
 *.tsbuildinfo
+
+# personal claude config
+claude/
+claude.md
+
+# todo list
+todo.txt

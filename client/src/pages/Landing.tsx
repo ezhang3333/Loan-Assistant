@@ -27,13 +27,12 @@ export default function Landing() {
               <span className="label">Matched Bank</span>
               <span className="value">Chase Premier</span>
             </div>
-            <a className="match-cta" href="#">Click to match</a>
           </div>
+          <a className="match-cta" href="#">Click to match</a>
         </section>
 
         <aside className="hero-side">
           <div className="card card-photo">
-            <div className="photo-accent" />
             <div className="stat">
               <span className="stat-number">10K+</span>
               <span className="stat-label">Loans Matched in Minutes</span>
