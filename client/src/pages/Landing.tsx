@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import cardStack from '../../imgs/card_stack.png';
 import '../css/landing.css';
 
 export default function Landing() {
@@ -5,6 +7,11 @@ export default function Landing() {
     <div className="landing">
       <header className="top-bar">
         <div className="brand">LOAN MATCH</div>
+        <nav className="top-nav">
+          <a href="#">About</a>
+          <Link to="/loans">Loans</Link>
+          <Link to="/banks">Banks</Link>
+        </nav>
         <div className="auth-actions">
           <a className="btn btn-ghost" href="#">Login</a>
           <a className="btn btn-accent" href="#">Start Now →</a>
@@ -14,21 +21,11 @@ export default function Landing() {
       <main className="hero-grid">
         <section className="card card-hero">
           <h1>The Modern Loan<br />Matching Platform</h1>
-          <a className="btn btn-accent btn-lg" href="#">Sign up with sandbox →</a>
-
-          <div className="match-widget">
-            <div className="match-badge">$</div>
-            <div className="match-side">
-              <span className="label">Loan Amount</span>
-              <span className="value">50,000.00</span>
-            </div>
-            <span className="match-arrow">--&gt;</span>
-            <div className="match-side right">
-              <span className="label">Matched Bank</span>
-              <span className="value">Chase Premier</span>
-            </div>
+          <img src={cardStack} alt="Stack of payment cards" className="hero-image" />
+          <div className="hero-ctas">
+            <Link className="btn btn-accent btn-lg" to="/loans">Browse Loans →</Link>
+            <Link className="btn btn-ghost btn-lg" to="/banks">Find Banks →</Link>
           </div>
-          <a className="match-cta" href="#">Click to match</a>
         </section>
 
         <aside className="hero-side">
