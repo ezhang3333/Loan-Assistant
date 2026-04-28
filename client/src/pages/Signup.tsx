@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Mail, Lock, EyeOff } from 'lucide-react';
 import googleIcon from '../../imgs/google.svg';
-import { api } from '../api';
 import '../css/landing.css';
 import '../css/auth.css';
 
@@ -11,20 +10,15 @@ export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSubmitting(true);
-    try {
-      await api.signupUser(username, password);
-      navigate('/login');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Signup failed');
-    } finally {
-      setSubmitting(false);
+    if (!username.trim() || !password) {
+      setError('Username and password required');
+      return;
     }
+    setError('');
+    navigate('/signup/profile', { state: { username: username.trim(), password } });
   };
 
   return (
@@ -63,12 +57,8 @@ export default function Signup() {
 
             {error && <p className="auth-error">{error}</p>}
 
-            <button
-              type="submit"
-              className="btn btn-accent btn-lg auth-primary"
-              disabled={submitting}
-            >
-              {submitting ? 'Signing up…' : 'Sign up'}
+            <button type="submit" className="btn btn-accent btn-lg auth-primary">
+              Sign up
             </button>
 
             <div className="auth-divider">or</div>

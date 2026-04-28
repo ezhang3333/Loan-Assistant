@@ -6,6 +6,7 @@ import Banks from './pages/Banks';
 import Analytics from './pages/Analytics';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CompleteProfile from './pages/CompleteProfile';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/signup/profile" element={<CompleteProfile />} />
         <Route path="/users" element={<Users />} />
         <Route path="/loans" element={<Loans />} />
         <Route path="/banks" element={<Banks />} />

@@ -116,6 +116,39 @@
   text-transform: uppercase;
 }
 
+/* ===== Profile fields grid ===== */
+.auth-form:has(.auth-fields-grid) {
+  max-width: 560px;
+}
+
+.auth-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.auth-fields-grid .auth-input input {
+  padding-left: 20px;
+}
+
+.auth-input select {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: 1px solid #d9d7cf;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.auth-input select:focus {
+  border-color: var(--green-dark);
+}
+
 /* ===== Inline error ===== */
 .auth-error {
   margin: 4px 0 0;
@@ -199,5 +232,8 @@
   }
   .card-auth-photo {
     min-height: 280px;
+  }
+  .auth-fields-grid {
+    grid-template-columns: 1fr;
   }
 }

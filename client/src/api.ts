@@ -26,11 +26,26 @@ async function postJsonOrThrow<T>(url: string, body: unknown): Promise<T> {
   return data as T;
 }
 
+export interface SignupPayload {
+  username: string;
+  password: string;
+  gender: string;
+  marital_status: string;
+  annual_income: number;
+  credit_score: number;
+  num_loans_taken: number;
+  age: number;
+  employment_status: string;
+  num_existing_loans: number;
+  zipcode: number;
+  loan_amount_asked: number;
+}
+
 export const api = {
   loginUser: <T,>(username: string, password_attempt: string) =>
     postJsonOrThrow<T>('/api/users/login', { username, password_attempt }),
-  signupUser: <T,>(username: string, password: string) =>
-    postJsonOrThrow<T>('/api/users/create', { username, password }),
+  signupUser: <T,>(payload: SignupPayload) =>
+    postJsonOrThrow<T>('/api/users/create', payload),
 
   getUsers: <T,>(qs = '') => getJson<T>(`/api/users${qs}`),
   addUser: <T,>(u: unknown) => postJson<T>('/api/users/add', u),
