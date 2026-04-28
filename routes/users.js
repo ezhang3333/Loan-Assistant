@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('../db');
-const bcrpyt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 const router = express.Router();
 
 const LIST_SQL = 'SELECT * FROM User ORDER BY user_id LIMIT 50';
@@ -15,7 +15,7 @@ router.post('/login', async (req, res) => {
     }
 
     const sql = 'SELECT * FROM User WHERE username = ?';
-    const [rows] = await db.query(sql, [username]);
+    const [rows] = await db.promise().query(sql, [username]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid username or password' });
@@ -38,7 +38,8 @@ router.post('/login', async (req, res) => {
 
     return res.status(200).json({ user });
   } catch (err) {
-    return res.status(500).json({ error: `Server error: ${err.body}` });
+    console.error('login error:', err);
+    return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
 
@@ -67,12 +68,12 @@ router.post('/create', async (req, res) => {
 
     // check username already taken
     const checkSql = 'SELECT user_id FROM User WHERE username = ?';
-    const [existingRows] = await db.query(checkSql, [username]);
+    const [existingRows] = await db.promise().query(checkSql, [username]);
     if (existingRows.length > 0) {
       return res.status(409).json({ error: 'Username already exists' });
     }
 
-    const password_hash = await bcrpyt.hash(password, saltRounds);
+    const password_hash = await bcrypt.hash(password, saltRounds);
     const sql = `
       INSERT INTO User (
         username,
@@ -106,14 +107,15 @@ router.post('/create', async (req, res) => {
       loan_amount_asked
     ];
 
-    const [result] = await db.query(sql, values);
+    const [result] = await db.promise().query(sql, values);
 
     return res.status(201).json({
       message: 'User created successfully',
-      user_id: result.insertId 
+      user_id: result.insertId
     });
   } catch (err) {
-    return res.status(500).json({ error: `Server error: ${err.body}` });
+    console.error('create error:', err);
+    return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
 

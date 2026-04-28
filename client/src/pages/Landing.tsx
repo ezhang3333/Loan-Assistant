@@ -13,8 +13,8 @@ export default function Landing() {
           <Link to="/banks">Banks</Link>
         </nav>
         <div className="auth-actions">
-          <a className="btn btn-ghost" href="#">Login</a>
-          <a className="btn btn-accent" href="#">Start Now →</a>
+          <Link className="btn btn-ghost" to="/login">Login</Link>
+          <Link className="btn btn-accent" to="/signup">Start Now</Link>
         </div>
       </header>
 
