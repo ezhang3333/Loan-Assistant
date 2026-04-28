@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
-import Users from './pages/Users';
-import Loans from './pages/Loans';
-import Banks from './pages/Banks';
-import Analytics from './pages/Analytics';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CompleteProfile from './pages/CompleteProfile';
+import Dashboard from './pages/Dashboard';
+import Heatmap from './pages/Heatmap';
+import LoanAssistant from './pages/LoanAssistant';
+import Simulator from './pages/Simulator';
 
 export default function App() {
   return (
@@ -16,10 +16,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/profile" element={<CompleteProfile />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/loans" element={<Loans />} />
-        <Route path="/banks" element={<Banks />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/heatmap" element={<Heatmap />} />
+        <Route path="/assistant" element={<LoanAssistant />} />
+        <Route path="/simulator" element={<Simulator />} />
       </Routes>
     </BrowserRouter>
   );

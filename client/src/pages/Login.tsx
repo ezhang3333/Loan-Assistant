@@ -19,7 +19,7 @@ export default function Login() {
     setSubmitting(true);
     try {
       await api.loginUser(username, password);
-      navigate('/users');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
     } finally {

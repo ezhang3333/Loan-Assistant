@@ -1,0 +1,94 @@
+/* =============================================
+   APP NAVBAR — Dark Steel Blue
+   ============================================= */
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  background: var(--bg-darker);
+  border-bottom: 1px solid var(--border-dark);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.3s ease;
+}
+
+.app-nav-brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-light);
+}
+
+.app-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--light);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.nav-link:hover {
+  color: #e2e8f0;
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+
+.nav-logout {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--light);
+  background: transparent;
+  border: 1.5px solid var(--border-dark);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition);
+}
+
+.nav-logout:hover {
+  color: #e2e8f0;
+  border-color: #4a5568;
+  background: rgba(255,255,255,0.04);
+}
+
+@media (max-width: 900px) {
+  .app-nav {
+    padding: 10px 16px;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .app-nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .nav-link { padding: 7px 12px; font-size: 12px; }
+}

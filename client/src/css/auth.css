@@ -1,45 +1,43 @@
-/* Auth pages (Login + Signup) — shares color tokens & .btn / .card classes from landing.css.
-   Import landing.css alongside this file so --cream, --card-beige, --green-dark, --accent-yellow,
-   --muted, --radius, and the button/card styles are available. */
+/* =============================================
+   AUTH PAGES — Steel Blue Theme
+   ============================================= */
 
 .auth-page {
   min-height: 100vh;
-  padding: 20px;
-  background: var(--cream);
+  background: var(--bg);
   display: flex;
+  animation: fadeIn 0.35s ease;
 }
 
 .auth-grid {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  min-height: calc(100vh - 40px);
+  min-height: 100vh;
 }
 
-/* ===== Left card: form ===== */
+/* ===== Left: form ===== */
 .card-auth-form {
-  background: var(--card-beige);
+  background: var(--card);
   padding: 64px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image:
-    radial-gradient(circle at center 85%, rgba(0,0,0,0.04) 0, transparent 40%);
 }
 
 .card-auth-form h1 {
-  font-size: 56px;
-  line-height: 1.05;
+  font-size: 36px;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  font-weight: 500;
-  margin: 0 0 16px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--ink);
 }
 
 .auth-sub {
   margin: 0 0 32px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   max-width: 380px;
   line-height: 1.5;
@@ -48,12 +46,12 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 420px;
+  gap: 14px;
+  max-width: 400px;
   width: 100%;
 }
 
-/* ===== Input with icons ===== */
+/* ===== Inputs ===== */
 .auth-input {
   position: relative;
   display: flex;
@@ -62,178 +60,180 @@
 
 .auth-input input {
   width: 100%;
-  padding: 14px 20px 14px 48px;
-  border-radius: 999px;
-  border: 1px solid #d9d7cf;
-  background: #fff;
+  padding: 14px 18px 14px 46px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg);
   font: inherit;
   font-size: 14px;
+  font-weight: 500;
   color: var(--ink);
   outline: none;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
-
-.auth-input input::placeholder {
-  color: var(--muted);
-}
-
+.auth-input input::placeholder { color: var(--light); }
 .auth-input input:focus {
-  border-color: var(--green-dark);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: var(--card);
 }
-
-.auth-input input.has-trailing {
-  padding-right: 48px;
-}
+.auth-input input.has-trailing { padding-right: 46px; }
 
 .auth-input .icon-leading,
 .auth-input .icon-trailing {
   position: absolute;
   width: 18px;
   height: 18px;
-  color: var(--muted);
+  color: var(--light);
   pointer-events: none;
 }
-
-.auth-input .icon-leading {
-  left: 18px;
-}
-
+.auth-input .icon-leading { left: 16px; }
 .auth-input .icon-trailing {
-  right: 18px;
+  right: 16px;
   cursor: pointer;
   pointer-events: auto;
 }
 
-/* ===== Primary button (extends .btn .btn-accent .btn-lg) ===== */
+/* ===== Submit button ===== */
 .auth-primary {
   width: 100%;
-  justify-content: center;
-  margin-top: 8px;
+  margin-top: 6px;
   border: none;
   font: inherit;
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-/* ===== Profile fields grid ===== */
-.auth-form:has(.auth-fields-grid) {
-  max-width: 560px;
-}
+/* ===== Profile grid ===== */
+.auth-form:has(.auth-fields-grid) { max-width: 540px; }
 
 .auth-fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
-
-.auth-fields-grid .auth-input input {
-  padding-left: 20px;
-}
+.auth-fields-grid .auth-input input { padding-left: 18px; }
 
 .auth-input select {
   width: 100%;
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: 1px solid #d9d7cf;
-  background: #fff;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg);
   font: inherit;
   font-size: 14px;
+  font-weight: 500;
   color: var(--ink);
   outline: none;
   appearance: none;
   cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
 }
-
 .auth-input select:focus {
-  border-color: var(--green-dark);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background-color: var(--card);
 }
 
-/* ===== Inline error ===== */
+/* ===== Error ===== */
 .auth-error {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-size: 13px;
-  color: #c0392b;
+  font-weight: 500;
+  color: #dc2626;
   text-align: center;
+  padding: 10px 16px;
+  background: #fef2f2;
+  border-radius: var(--radius-xs);
+  border: 1px solid #fecaca;
 }
 
 /* ===== Divider ===== */
 .auth-divider {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 8px 0;
-  color: var(--muted);
+  gap: 14px;
+  margin: 4px 0;
+  color: var(--light);
   font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-
 .auth-divider::before,
 .auth-divider::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: #d9d7cf;
+  background: var(--border);
 }
 
-/* ===== Google button (extends .btn .btn-ghost .btn-lg) ===== */
+/* ===== Google ===== */
 .auth-google {
   width: 100%;
   justify-content: center;
-  background: #fff;
+  background: var(--card);
+  border-color: var(--border);
   font: inherit;
   font-size: 13px;
-  letter-spacing: 0.04em;
+  font-weight: 500;
   text-transform: none;
   cursor: pointer;
+  border-radius: var(--radius-sm);
 }
-
-.auth-google img {
-  width: 18px;
-  height: 18px;
-}
+.auth-google:hover { background: var(--bg); }
+.auth-google img { width: 18px; height: 18px; }
 
 /* ===== Swap link ===== */
 .auth-swap {
   margin: 16px 0 0;
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
-
 .auth-swap a {
-  color: var(--ink);
+  color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 1px;
+  font-weight: 600;
 }
+.auth-swap a:hover { text-decoration: underline; }
 
-.auth-swap a:hover {
-  opacity: 0.7;
-}
-
-/* ===== Right card: photo ===== */
+/* ===== Right: dark panel ===== */
 .card-auth-photo {
+  background: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-auth-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image: url('../../imgs/landing_page.jpg');
   background-size: cover;
   background-position: center;
-  min-height: 600px;
+  opacity: 0.3;
+}
+
+.card-auth-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26,32,44,0.9) 0%, rgba(45,55,72,0.7) 100%);
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
-  .auth-grid {
-    grid-template-columns: 1fr;
-  }
-  .card-auth-form {
-    padding: 40px 24px;
-  }
-  .card-auth-form h1 {
-    font-size: 36px;
-  }
-  .card-auth-photo {
-    min-height: 280px;
-  }
-  .auth-fields-grid {
-    grid-template-columns: 1fr;
-  }
+  .auth-grid { grid-template-columns: 1fr; }
+  .card-auth-form { padding: 40px 24px; }
+  .card-auth-form h1 { font-size: 28px; }
+  .card-auth-photo { min-height: 160px; order: -1; }
+  .auth-fields-grid { grid-template-columns: 1fr; }
 }

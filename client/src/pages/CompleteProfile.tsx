@@ -79,7 +79,7 @@ export default function CompleteProfile() {
     setSubmitting(true);
     try {
       await api.signupUser(payload);
-      navigate('/loans');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Signup failed');
     } finally {
